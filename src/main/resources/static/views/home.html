@@ -1,6 +1,5 @@
-<div class="container">
+<div class="container" ng-show="authenticated">
 	<div class="row">
-		<!-- 	<h1>Flapper News</h1> -->
 		<div class="col-xs-12 col-sm-9">
 			<ul class="breadcrumb">
 				<li class="active">
@@ -16,16 +15,16 @@
 			<table class="table ">
 				<tr ng-repeat="post in posts | orderBy:'-upvotes'">
 					<!-- 							<td>{{ post.id }}</td> -->
-					<td><a href="#/{{post.id}}"> {{ post.title }}</a></td>
-					<td><a href="#/{{post.id}}"> {{ post.body | limitTo : 75 }}...</a></td>
-					<td>{{ post.author.name }}</td> 
+					<td>
+						<a href="#/{{post.id}}"> {{ post.title }}</a>
+					</td>
+					<td width="70%">
+						<a href="#/{{post.id}}"> {{ post.body | limitTo : 75 }}...</a>
+					</td>
+					<td>{{ post.author.name }}</td>
 					<td nowrap=nowrap align="right">
-						<i ng-click="upvote(post, true)" style="color: blue" class="fa fa-xs fa-thumbs-up"></i>
-						<i ng-click="upvote(post, false)" style="color: blue" class="fa fa-xs fa-thumbs-down"></i>
-						{{post.upvotes}}
 						<i ng-click="editPost(post)" style="color: blue" class="fa fa-xs fa-pencil-square-o"></i>
-						<i ng-click="deletePost(post)" style="color: blue" class="fa fa-xs fa-trash-o"></i>
-
+						<i ng-click="deletePost(post)" style="color: blue" class="fa fa-xs fa-trash-o" ng-show="isAdmin" ></i>
 					</td>
 				</tr>
 			</table>
@@ -65,8 +64,8 @@
 					</div>
 
 					<div class="col-sm-2">
-						<button ng-click="savePost()" ng-class="isEdit ? 'btn-warning':'btn-primary'" style="width: 120px" class="btn pull-right">{{isEdit
-							? 'Save changes':'Add Post'}}</button>
+						<button ng-click="savePost(post)" ng-class="isEdit ? 'btn-warning':'btn-primary'" style="width: 120px"
+							class="btn pull-right">{{isEdit ? 'Save changes':'Add Post'}}</button>
 					</div>
 				</div>
 

@@ -1,7 +1,6 @@
 package com.rac;
 
 import java.util.Date;
-import java.util.List;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -40,7 +39,8 @@ public class TestDao {
 
     @Test
     public void savePost() {
-	Post post = postRepository.findAll().get(2);
+	Post post = postRepository.findAll().get(1);
+	System.err.println(post.getId());
 	// post.setAuthor(authorRepository.findAll().get(0));
 	// post.setBody("body");
 	// post.setTitle("title");
@@ -49,18 +49,23 @@ public class TestDao {
 	comment.setComment("comment2");
 	comment.setDate(new Date());
 	comment.setRating(5);
-	comment.setPost(post);
-	// post.getComments().add(comment);
-
+	// comment.setPost(post);
 	commentRepository.save(comment);
+	// List<Comment> c = post.getComments();
+	// c.add(comment);
+	// post.setComments(c);
+
+	post.addComment(comment);
+
+	postRepository.save(post);
     }
 
     @Test
     public void findComment() {
 	Post post = postRepository.findAll().get(1);
-	List<Comment> comments = commentRepository.findCommentByPostId(post
-		.getId());
-	System.err.println(comments.get(0));
+	// List<Comment> comments =
+	// commentRepository.findCommentByPostId(post.getId());
+	// System.err.println(comments.get(0));
 
     }
 

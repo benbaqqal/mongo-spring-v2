@@ -1,0 +1,10 @@
+select.input-xs {
+  height: 22px;
+  line-height: 22px;
+  font-size: 11px;
+  padding-top: 2px !important;
+}
+
+.navbar-top-links li {
+  display: inline-block;
+}

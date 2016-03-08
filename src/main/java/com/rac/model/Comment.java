@@ -2,10 +2,13 @@ package com.rac.model;
 
 import java.util.Date;
 
-import org.springframework.data.mongodb.core.mapping.DBRef;
+import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
+@Document
 public class Comment {
 
+    @Id
     private String id;
 
     private String comment;
@@ -14,8 +17,13 @@ public class Comment {
 
     private Date date;
 
-    @DBRef
-    private Post post;
+    private int upvotes;
+
+    // @DBRef
+    // private Post post;
+
+    public Comment() {
+    }
 
     public String getId() {
 	return id;
@@ -49,18 +57,25 @@ public class Comment {
 	this.rating = rating;
     }
 
-    public Post getPost() {
-	return post;
+    // public Post getPost() {
+    // return post;
+    // }
+    //
+    // public void setPost(Post post) {
+    // this.post = post;
+    // }
+
+    public int getUpvotes() {
+	return upvotes;
     }
 
-    public void setPost(Post post) {
-	this.post = post;
+    public void setUpvotes(int upvotes) {
+	this.upvotes = upvotes;
     }
 
     @Override
     public String toString() {
-	return "Comment [id=" + id + ", comment=" + comment + ", rating="
-		+ rating + ", date=" + date + "]";
+	return "Comment [id=" + id + ", comment=" + comment + ", rating=" + rating + ", date=" + date + "]";
     }
 
 }

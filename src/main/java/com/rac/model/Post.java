@@ -20,7 +20,15 @@ public class Post {
     @DBRef
     private Author author;
 
+    @DBRef
     private List<Comment> comments;
+
+    public void addComment(Comment comment) {
+	if (comments == null) {
+	    comments = new ArrayList<>();
+	}
+	this.comments.add(comment);
+    }
 
     private int upvotes;
 
@@ -80,9 +88,8 @@ public class Post {
 
     @Override
     public String toString() {
-	return "Post [id=" + id + ", title=" + title + ", body=" + body
-		+ ", author=" + author + ", comments=" + comments
-		+ ", upvotes=" + upvotes + "]";
+	return "Post [id=" + id + ", title=" + title + ", body=" + body + ", author=" + author + ", comments="
+		+ comments + ", upvotes=" + upvotes + "]";
     }
 
 }

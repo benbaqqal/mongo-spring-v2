@@ -1,0 +1,17 @@
+spring:
+  data:
+    rest:
+      max-page-size: 3
+      
+server:
+  port: 8090
+
+security:
+  user:
+    password: password
+    
+logging:
+  level:
+    org.springframework.security: DEBUG
+    
+ 

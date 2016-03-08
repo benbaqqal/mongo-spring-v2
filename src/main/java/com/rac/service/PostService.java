@@ -50,9 +50,9 @@ public class PostService {
 	return commentRepository.findAll();
     }
 
-    public List<Comment> findCommentByPostId(Post post) {
-	return commentRepository.findCommentByPostId(post.getId());
-    }
+    // public List<Comment> findCommentByPostId(Post post) {
+    // return commentRepository.findCommentByPostId(post.getId());
+    // }
 
     public Comment getComment(final String id) {
 	return commentRepository.findOne(id);

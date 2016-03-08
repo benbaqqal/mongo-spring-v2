@@ -1,5 +1,5 @@
 
-<div class="container">
+<div class="container" ng-show="authenticated">
 	<div class="row">
 		<div class="col-xs-12 col-sm-9">
 			<ul class="breadcrumb">
@@ -20,22 +20,26 @@
 	</div>
 
 
-
 	<div class="row row-content">
 		<div class="col-xs-12 col-sm-9">
 
-			<h5 class="form-group form-inline" ng-show="comments.length">
+			<hr>
+			<h5 class="form-group form-inline" ng-show="post.comments.length">
+
 				<b>
 					<small>Sort by:</small>
+					<select class="form-control input-xs" ng-model="orderAttr" ng-options="data for data in orderBy">
+					</select>
+					<input ng-show="orderBy.indexOf(orderAttr)!=-1" type="checkbox" ng-model="isReverse" ng-change="reverseSort()" />
 				</b>
-				<input type="text" class="form-control" ng-model="order">
 			</h5>
 
 			<div>
 				<ul class="media-list">
-					<li class="media" ng-repeat="comment in comments | orderBy : order">
+					<li class="media" ng-repeat="comment in post.comments | orderBy : order">
 
 						<blockquote>
+
 							<div class="">
 								<i class="fa fa-xs fa-star-o" ng-if="comment.rating >= 1"></i>
 								<i class="fa fa-xs fa-star-o" ng-if="comment.rating >= 2"></i>
@@ -46,21 +50,25 @@
 							<h5>
 								<b>{{comment.comment}}</b>
 							</h5>
-							<footer> {{comment.date | date:'yyyy-MM-dd HH:mm:ss'}} </footer>
+							<small>
+								{{comment.upvotes}}
+								<i ng-click="upvote(true,comment)" style="color: blue; cursor: pointer" class="fa fa-xs fa-angle-up"></i>
+								|
+								<i ng-click="upvote(false, comment)" style="color: blue; cursor: pointer" class="fa fa-xs fa-angle-down"></i>
+								- {{comment.date | date:'yyyy-MM-dd HH:mm:ss'}}
+							</small>
 						</blockquote>
 					</li>
 				</ul>
 			</div>
 		</div>
 		<div class="col-xs-12 col-sm-9">
-			<form class="form-horizontal" name="commentForm"
-				ng-submit="saveComment()" novalidate>
+			<form class="form-horizontal" name="commentForm" ng-submit="saveComment()" novalidate>
 				<div class="form-group">
 					<label for="rating" class="col-sm-2 control-label">Stars</label>
 					<div class="col-sm-10">
 						<label class="radio-inline" ng-repeat="n in [1,2,3,4,5]">
-							<input type="radio" checked="checked" name="rating" ng-model="comment.rating"
-								ng-value="n">
+							<input type="radio" checked="checked" name="rating" ng-model="comment.rating" ng-value="n">
 							{{n}}
 						</label>
 					</div>
@@ -70,31 +78,19 @@
 					ng-class="{ 'has-error' : commentForm.comment.$error.required && !commentForm.comment.$pristine }">
 					<label for="comment" class="col-sm-2 control-label">Comment</label>
 					<div class="col-sm-10">
-						<textarea rows="12" class="form-control" id="comment"
-							name="comment" ng-model="comment.comment" required></textarea>
-						<span
-							ng-show="commentForm.comment.$error.required && !commentForm.comment.$pristine"
-							class="help-block">comment is required.</span>
+						<textarea rows="2" class="form-control" id="comment" name="comment" ng-model="comment.comment" required></textarea>
+						<span ng-show="commentForm.comment.$error.required && !commentForm.comment.$pristine" class="help-block">comment
+							is required.</span>
 					</div>
 				</div>
 
 				<div class="form-group">
 					<div class="col-sm-offset-2 col-sm-10">
-						<button type="submit" class="btn btn-primary"
-							ng-disabled="commentForm.$invalid">Submit Comment</button>
+						<button type="submit" class="btn btn-primary" ng-disabled="commentForm.$invalid">Submit Comment</button>
 					</div>
 				</div>
 			</form>
 
 		</div>
-
-
-
-
 	</div>
-
-
-
-
-
 </div>

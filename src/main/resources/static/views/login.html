@@ -1,0 +1,29 @@
+<div class="vertical-center">
+	<div class="container">
+		<div class="col-xs-5 col-xs-offset-4">
+			<hgroup>
+				<h3>Spring / Mongo / Angular App </h3>
+				<h5>By Normasys Lab</h5>
+			</hgroup>
+			<div class="alert alert-danger" ng-show="error">There was a problem logging in. Please try again.</div>
+			<form ng-submit="login()">
+				<div class="group">
+					<input type="text"  ng-model="credentials.username" ng-class="credentials.username ? 'used':''" />
+					<span class="highlight"></span>
+					<span class="bar"></span>
+					<label>Name</label>
+				</div>
+				<div class="group">
+					<input type="password" ng-model="credentials.password" ng-class="credentials.password ? 'used':''"  />
+					<span class="highlight"></span>
+					<span class="bar"></span>
+					<label>Password</label>
+				</div>
+				<button type="submit" class="button buttonBlue ">
+					Login
+				</button>
+			</form>
+		</div>
+	</div>
+</div>
+<link rel="stylesheet" href="../css/login.css" />
