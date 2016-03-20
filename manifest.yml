@@ -1,0 +1,7 @@
+applications:
+- name: app-springBoot
+  memory: 512M
+  instances: 1
+  path: target/mongo-spring-0.0.1-SNAPSHOT.war
+  buildpack: https://github.com/cloudfoundry/java-buildpack.git
+  stack: cflinuxfs2
